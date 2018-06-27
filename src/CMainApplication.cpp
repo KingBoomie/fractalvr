@@ -14,7 +14,7 @@
 #include <glm/ext.hpp>
 #include <glm/glm.hpp>
 #include <GL/glew.h>
-#include "SDL.h"
+#include "SDL2/SDL.h"
 //#include <hdf5_hl.h>
 //#include <zconf.h>
 #include "CMainApplication.h"
@@ -37,8 +37,8 @@ GLenum drawBuffers[] = {GL_COLOR_ATTACHMENT0};
 CMainApplication::CMainApplication( int argc, char *argv[] )
 	: m_pCompanionWindow(NULL)
 	, m_pContext(NULL)
-	, m_nCompanionWindowWidth( 640 )
-	, m_nCompanionWindowHeight( 320 )
+	, m_nCompanionWindowWidth( 1280 )
+	, m_nCompanionWindowHeight( 640 )
 	, m_unSceneProgramID( 0 )
 	, m_unCompanionWindowProgramID( 0 )
 	, m_unControllerTransformProgramID( 0 )
@@ -59,7 +59,7 @@ CMainApplication::CMainApplication( int argc, char *argv[] )
 	, m_nScreenSizeLoc( -1 )
 	, m_nControllerMatrixLocation( -1 )
 	, m_nRenderModelMatrixLocation( -1 )
-	, m_nKernelSize( 3 )
+	, m_nKernelSize( 2 )
 	, m_iTrackedControllerCount( 0 )
 	, m_iTrackedControllerCount_Last( -1 )
 	, m_iValidPoseCount( 0 )
@@ -955,8 +955,8 @@ bool CMainApplication::SetupStereoRenderTargets()
 {
     if( !m_bSteamVR )
     {
-        m_nRenderWidth = highestPowerof2(m_nCompanionWindowWidth/2);
-        m_nRenderHeight = highestPowerof2(m_nCompanionWindowHeight);
+        m_nRenderWidth = m_nCompanionWindowWidth/2;
+        m_nRenderHeight = m_nCompanionWindowHeight;
     }else{
         if (!m_pHMD )
             return false;
